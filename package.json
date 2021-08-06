@@ -1,5 +1,28 @@
 {
+  "name": "html-and-webgl",
+  "description": "",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "",
+  "scripts": {
+    "start": "parcel serve index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "three": "^0.131.3"
+  },
   "devDependencies": {
-    "prettier": "^2.3.1"
-  }
+    "parcel": "^2.0.0-rc.0",
+    "prettier": "^2.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitwhys/html-and-webgl.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/bitwhys/html-and-webgl/issues"
+  },
+  "homepage": "https://github.com/bitwhys/html-and-webgl#readme"
 }
