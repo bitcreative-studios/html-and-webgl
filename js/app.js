@@ -56,10 +56,11 @@ export default class Sketch {
   }
 
   addObjects = () => {
-    this.geometry = new THREE.IcosahedronGeometry(20, 4)
-    this.material = new THREE.MeshBasicMaterial({
-      color: 0xb7ff00,
-      wireframe: true,
+    this.geometry = new THREE.IcosahedronGeometry(20, 12)
+    this.material = new THREE.ShaderMaterial({
+      vertexShader,
+      fragmentShader,
+      // wireframe: true,
     })
     this.mesh = new THREE.Mesh(this.geometry, this.material)
     this.scene.add(this.mesh)
@@ -79,4 +80,6 @@ export default class Sketch {
 
 new Sketch({
   container: document.getElementById('container'),
+  // fov: 70,
+  cameraStart: 200,
 })
