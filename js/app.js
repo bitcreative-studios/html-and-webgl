@@ -1,5 +1,9 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import fragmentShader from './shaders/fragment.glsl'
+import vertexShader from './shaders/vertex.glsl'
+
+import ocean from '../images/ocean-image.jpeg'
 
 // Export so that created effects can be used in any other environment/framework
 export default class Sketch {
@@ -43,20 +47,18 @@ export default class Sketch {
   }
 
   addObjects() {
-    this.geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2)
-    this.material = new THREE.MeshNormalMaterial()
+    this.geometry = new THREE.PlaneBufferGeometry(1, 1, 50, 50)
+    // this.material = new THREE.MeshNormalMaterial()
 
     this.material = new THREE.ShaderMaterial({
-      fragmentShader: `
-        void main() {
-          gl_FragColor = vec4(0.95, 0.03, 0.2, 1.);
-        }
-      `,
-      vertexShader: `
-        void main() {
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
+      uniforms: {
+        time: { value: 0 },
+        oceanTexture: { value: new THREE.TextureLoader().load(ocean) },
+      },
+      side: THREE.DoubleSide,
+      fragmentShader,
+      vertexShader,
+      // wireframe: true,
     })
 
     this.mesh = new THREE.Mesh(this.geometry, this.material)
@@ -69,6 +71,7 @@ export default class Sketch {
     // console.log(this.time)
     this.mesh.rotation.x = this.time / 2000
     this.mesh.rotation.y = this.time / 1000
+    this.material.uniforms.time.value = this.time
     this.renderer.render(this.scene, this.camera)
     window.requestAnimationFrame(this.render.bind(this))
   }
